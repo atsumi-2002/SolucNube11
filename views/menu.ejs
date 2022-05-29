@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Express</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link href="/inspinia/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- FooTable -->
+    <link href="/inspinia/css/plugins/footable/footable.core.css" rel="stylesheet">
+
+    <link href="/inspinia/css/animate.css" rel="stylesheet">
+    <link href="/inspinia/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Lab 02 app</span>
+        </div>
+    </nav>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h1>Lista de historias</h1>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/newS" type="button" class="btn btn-w-m btn-primary me-md-2">Agregar historia</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                    <thead>
+                    <tr>
+                        <th data-toggle="true">Imagen</th>
+                        <th>Titulo</th>
+                        <th data-hide="all">Autor</th>
+                        <th data-hide="all">Historia</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% stories.forEach((story)=> { %>
+                        <tr>
+                            <td><img src="<%= story.imagen %>" width="100" height="100"></td>
+                            <td><%= story.titulo %></td>
+                            <td><%= story.autor %></td>
+                            <td><%= story.texto %></td>
+                            <td class="tooltip-demo">
+                                <a href="/story/<%= story.id %>" class="btn btn-warning btn-circle" type="button" data-toggle="tooltip" data-placement="top" title="editar"><i class="fa fa-paste"></i></a>
+                                <a href="/comments/<%= story.id %>" class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" title="comentarios"><i class="fa fa-comments"></i></a>
+                                <form action="/deleteS/<%= story.id %>" method="post">
+                                    <button id="delete" class="btn btn-danger btn-circle" type="submit" data-toggle="tooltip" data-placement="top" title="eliminar"><i class="fa fa-times"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h1>Lista de usuarios</h1>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="/newS" type="button" class="btn btn-w-m btn-primary me-md-2">Agregar historia</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="8">
+                    <thead>
+                    <>
+                        <th data-toggle="true">ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user)=> { %>
+                        <tr>
+                            <td><%= user.id %></td>
+                            <td><%= user.nombre %></td>
+                            <td><%= user.apellido %></td>
+                            <td><%= user.email %></td>
+                            <td class="tooltip-demo">
+                                <a href="/user/<%= user.id %>" class="btn btn-warning btn-circle" type="button" data-toggle="tooltip" data-placement="top" title="editar"><i class="fa fa-paste"></i></a>
+                                <a href="/comments/<%= user.id %>" class="btn btn-primary btn-circle" type="button" data-toggle="tooltip" data-placement="top" title="comentarios"><i class="fa fa-comments"></i></a>
+                                <form action="/deleteS/<%= user.id %>" method="post">
+                                    <button id="delete" class="btn btn-danger btn-circle" type="submit" data-toggle="tooltip" data-placement="top" title="eliminar"><i class="fa fa-times"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/inspinia/js/jquery-2.1.1.js"></script>
+    <script src="/inspinia/js/bootstrap.min.js"></script>
+    <script src="/inspinia/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- FooTable -->
+    <script src="/inspinia/js/plugins/footable/footable.all.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/inspinia/js/inspinia.js"></script>
+    <script src="/inspinia/js/plugins/pace/pace.min.js"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+            $('.footable').footable();
+            $('.footable2').footable();
+
+        });
+
+    </script>
+</body>
+</html>
